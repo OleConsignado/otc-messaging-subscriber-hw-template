@@ -1,0 +1,56 @@
+parentDomain: {{k8sParentDomain}}
+replicaCount: 1
+image:
+  repository: {{dockerHubUser}}/{{helmChartName}}
+  tag: 0
+dockerRegistrationSecret: ole-docker-reg
+
+# Runtime
+ASPNETCORE_ENVIRONMENT: "Development"
+TZ: "America/Sao_Paulo"
+
+# Log
+Serilog__MinimumLevel__Default: Warning
+Serilog__MinimumLevel__Override__Ole: Information
+Serilog__MinimumLevel__Override__Otc: Information
+RequestTrackerConfiguration__RequestTrackerEnabled: "true"
+
+# Core
+# variaveis de ambiente que afetam comportamentos de negocio
+
+# Servicos externos
+# apontamentos para servicos hospedados fora do kubernetes
+# WSAutorizador: "http://wsautorizador.oleconsignado.com.br/"
+
+# DB
+# strings de conexao com banco de dados
+
+# Cache
+DistributedCacheConfiguration__CacheStorageType: "SqlServer"
+DistributedCacheConfiguration__CacheSqlConnectionString: "{{cacheSqlConnectionString}};Application Name={{helmChartName}};"
+DistributedCacheConfiguration__CacheSqlSchemaName: "dbo"
+DistributedCacheConfiguration__CacheSqlTableName: "{{cacheTable}}"
+
+# Jwt
+JwtConfiguration__Audience: "{{helmChartName}}"
+JwtConfiguration__Issuer: "{{helmChartName}}"
+JwtConfiguration__SecretKey: "{{uniqueIdentifier}}"
+
+# Recursos
+memoryRequest: "256Mi"
+cpuRequest: "100m"
+memoryLimit: "384Mi"
+cpuLimit: "400m"
+
+#
+# Configuracoes que afetam o comportamento do SubscriberHostedWorker
+#
+
+# Rabbit
+RabbitMQConfiguration__Hosts__0: "k8s-environment-hostname"
+RabbitMQConfiguration__User: "k8s-environment-username"
+RabbitMQConfiguration__Password: "k8s-environment-password"
+RabbitMQConfiguration__VirtualHost: "{{helmChartName}}"
+
+# Otc.Messaging.Subscriber.HW
+SubscriberHWConfiguration__Queue: "pesquisa-filmes"

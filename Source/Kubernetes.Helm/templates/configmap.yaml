@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.Name | default .Chart.Name }}
+  labels:
+    app: {{ .Values.Name | default .Chart.Name }}
+    chart: {{ .Values.Name | default .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  # Runtime
+  ASPNETCORE_ENVIRONMENT: "{{ .Values.ASPNETCORE_ENVIRONMENT }}"
+  TZ: "{{ .Values.TZ }}"
+  ASPNETCORE_URLS: "http://*:80"
+  LANG: "pt_BR.UTF-8"
+  LANGUAGE: "pt_BR"
+
+  # Log
+  Serilog__MinimumLevel__Default: "{{ .Values.Serilog__MinimumLevel__Default }}"
+  Serilog__MinimumLevel__Override__Ole: "{{ .Values.Serilog__MinimumLevel__Override__Ole }}"
+  Serilog__MinimumLevel__Override__Otc: "{{ .Values.Serilog__MinimumLevel__Override__Otc }}"
+  RequestTrackerConfiguration__RequestTrackerEnabled: "{{ .Values.RequestTrackerConfiguration__RequestTrackerEnabled }}"  
+
+  # Core
+  # variaveis de ambiente que afetam comportamentos de negocio
+  # Obs.: Os valores nao devem ser colocados diretamente no configmap. 
+  #       A configuracao deve ser parametrizada e o valor colocado no values.yaml  
+
+  # Servicos internos
+  # apontamentos para servicos hospedados no kubernetes no mesmo namespace
+  # Ex.: 
+  # SegurancaAPI: "http://segurancaapi/"
+
+  # Servicos externos
+  # apontamentos para servicos hospedados fora do kubernetes
+  # Ex.: 
+  # WSAutorizador: "http://wsautorizador.oleconsignado.com.br/"
+  # Obs.: Os valores nao devem ser colocados diretamente no configmap. 
+  #       A configuracao deve ser parametrizada e o valor colocado no values.yaml
+  # WSAutorizador: "{{ .Values.WSAutorizador }}"
+
+  # DB
+  # strings de conexao com banco de dados
+  # Obs.: Os valores nao devem ser colocados diretamente no configmap. 
+  #       A configuracao deve ser parametrizada e o valor colocado no values.yaml  
+
+  # Cache
+  DistributedCacheConfiguration__CacheStorageType: "{{ .Values.DistributedCacheConfiguration__CacheStorageType }}"
+  DistributedCacheConfiguration__CacheSqlConnectionString: "{{ .Values.DistributedCacheConfiguration__CacheSqlConnectionString }}"
+  DistributedCacheConfiguration__CacheSqlSchemaName: "{{ .Values.DistributedCacheConfiguration__CacheSqlSchemaName }}"
+  DistributedCacheConfiguration__CacheSqlTableName: "{{ .Values.DistributedCacheConfiguration__CacheSqlTableName }}"
+
+  # Authorization
+  JwtConfiguration__Audience: "{{ .Values.JwtConfiguration__Audience }}"
+  JwtConfiguration__Issuer: "{{ .Values.JwtConfiguration__Issuer }}"
+  JwtConfiguration__SecretKey: "{{ .Values.JwtConfiguration__SecretKey }}"  
+
+  #
+  # Configuracoes que afetam o comportamento do SubscriberHostedWorker
+  #
+
+  # Rabbit
+  RabbitMQConfiguration__Hosts__0: "{{ .Values.RabbitMQConfiguration__Hosts__0 }}"
+  RabbitMQConfiguration__User: "{{ .Values.RabbitMQConfiguration__User }}"
+  RabbitMQConfiguration__Password: "{{ .Values.RabbitMQConfiguration__Password }}"
+  RabbitMQConfiguration__VirtualHost: "{{ .Values.RabbitMQConfiguration__VirtualHost }}"
+
+  # Otc.Messaging.Subscriber.HW
+  SubscriberHWConfiguration__Queues__0: "{{ .Values.SubscriberHWConfiguration__Queue }}"
+  SubscriberHWConfiguration__Queues__1: "{{ .Values.SubscriberHWConfiguration__Queue }}-retry-0"
+  SubscriberHWConfiguration__Queues__2: "{{ .Values.SubscriberHWConfiguration__Queue }}-retry-1"
+  SubscriberHWConfiguration__Queues__3: "{{ .Values.SubscriberHWConfiguration__Queue }}-retry-2"
