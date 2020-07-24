@@ -1,7 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Maverick.Domain.Models;
-using Maverick.Domain.Services;
 using Microsoft.Extensions.Logging;
 using Otc.DomainBase.Exceptions;
 using Otc.Messaging.Abstractions;
@@ -64,5 +62,30 @@ namespace SubscriberHostedWorker.Template
                 // com erro de negócio.
             }
         }
+    }
+
+    /// <summary>
+    /// 
+    /// TODO: Esta classe deve ser removida.
+    /// 
+    /// Está aqui apenas representando o objeto do domínio que será
+    /// recebido da fila.
+    /// 
+    /// </summary>
+    public class Pesquisa
+    {
+    }
+
+    /// <summary>
+    /// 
+    /// TODO: Esta classe deve ser removida.
+    /// 
+    /// Está aqui apenas representando um serviço do domínio que irá
+    /// processar o objeto recebido da fila.
+    /// 
+    /// </summary>
+    public interface IFilmesService
+    {
+        Task ObterFilmesAsync(Pesquisa pesquisa);
     }
 }

@@ -1,11 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
-using Maverick.Application;
-using Maverick.Domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Otc.AspNetCore.ApiBoot;
-using Otc.Extensions.Configuration;
 using Otc.Messaging.Subscriber.HW;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SubscriberHostedWorker.Template
 {
@@ -38,8 +35,6 @@ namespace SubscriberHostedWorker.Template
         protected override void ConfigureSubscriberServices(
             IServiceCollection services)
         {
-            services.AddApplication
-                (Configuration.SafeGet<ApplicationConfiguration>());
         }
     }
 }
