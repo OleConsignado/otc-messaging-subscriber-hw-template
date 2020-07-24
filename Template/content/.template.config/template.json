@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Ole Consignado",
+  "classifications": [ "HostedService" ],
+  "identity": "SubscriberHostedWorker",
+  "name": "Subscriber Hosted Worker",
+  "shortName": "subscriberhostedworker",
+  "sourceName": "SubscriberHostedWorker.Template",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "k8sParentDomain": {
+      "type": "parameter",
+      "isRequired": true,
+      "datatype": "string",
+      "replaces": "{{k8sParentDomain}}",
+      "defaultValue": "mykubernetes-cluster.mycompany.com",
+      "description": "Kubernetes ingress parent domain."
+    },
+    "cacheSqlConnectionString": {
+      "type": "parameter",
+      "isRequired": true,
+      "datatype": "string",
+      "replaces": "{{cacheSqlConnectionString}}",
+      "defaultValue": "",
+      "description": "SqlConnectionString to cache catalog. Example: Data Source=SQLSERVERHOST,1433;Initial Catalog=CacheCatalog;"
+    },
+    "cacheTable": {
+      "type": "parameter",
+      "isRequired": false,
+      "datatype": "string",
+      "replaces": "{{cacheTable}}",
+      "defaultValue": "CacheTable",
+      "description": "Cache table name."
+    },
+    "dockerHubUser": {
+      "type": "parameter",
+      "isRequired": false,
+      "datatype": "string",
+      "replaces": "{{dockerHubUser}}",
+      "defaultValue": "oleconsignado",
+      "description": "Docker Hub username."
+    },
+    "helmChartName": {
+      "type": "parameter",
+      "isRequired": true,
+      "datatype": "string",
+      "replaces": "{{helmChartName}}",
+      "description": "Helm chart/Docker image name."
+    },
+    "uniqueIdentifier": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "{{uniqueIdentifier}}",
+      "parameters": {
+        "format":"X"
+      }
+    }
+  }
+}
