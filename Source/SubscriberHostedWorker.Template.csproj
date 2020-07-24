@@ -27,10 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Maverick.Application\Maverick.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update=".dockerignore">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
