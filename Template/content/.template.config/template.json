@@ -57,6 +57,27 @@
       "parameters": {
         "format":"X"
       }
+    },
+    "rmqHost": {
+      "type": "parameter",
+      "isRequired": true,
+      "datatype": "string",
+      "replaces": "{{rmqHost}}",
+      "description": "RabbitMQ host name."
+    },
+    "rmqUser": {
+      "type": "parameter",
+      "isRequired": true,
+      "datatype": "string",
+      "replaces": "{{rmqUser}}",
+      "description": "RabbitMQ user name."
+    },
+    "rmqPassword": {
+      "type": "parameter",
+      "isRequired": true,
+      "datatype": "string",
+      "replaces": "{{rmqPassword}}",
+      "description": "RabbitMQ User password."
     }
   }
 }
