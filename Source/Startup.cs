@@ -35,6 +35,9 @@ namespace SubscriberHostedWorker.Template
         protected override void ConfigureSubscriberServices(
             IServiceCollection services)
         {
+            // TODO Esta declaração deve ser removida.
+            // Serve apenas para publicação inicial deste SubHW
+            services.AddScoped<IFilmesService, FilmesService>();
         }
     }
 }

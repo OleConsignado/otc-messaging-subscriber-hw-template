@@ -47,10 +47,10 @@ cpuLimit: "400m"
 #
 
 # Rabbit
-RabbitMQConfiguration__Hosts__0: "k8s-environment-hostname"
-RabbitMQConfiguration__User: "k8s-environment-username"
-RabbitMQConfiguration__Password: "k8s-environment-password"
-RabbitMQConfiguration__VirtualHost: "{{helmChartName}}"
+RabbitMQConfiguration__Hosts__0: "rabbitmq-rabbitmq-ha-discovery.rabbitmq.svc"
+RabbitMQConfiguration__User: "{{rmqUser}}"
+RabbitMQConfiguration__Password: "{{rmqPassword}}"
+RabbitMQConfiguration__VirtualHost: "/"
 
 # Otc.Messaging.Subscriber.HW
-SubscriberHWConfiguration__Queue: "pesquisa-filmes"
+SubscriberHWConfiguration__Queue: "filmes-pesquisados"
