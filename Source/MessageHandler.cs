@@ -78,7 +78,7 @@ namespace SubscriberHostedWorker.Template
 
     /// <summary>
     /// 
-    /// TODO: Esta classe deve ser removida.
+    /// TODO: Esta interface deve ser removida.
     /// 
     /// Está aqui apenas representando um serviço do domínio que irá
     /// processar o objeto recebido da fila.
@@ -87,5 +87,19 @@ namespace SubscriberHostedWorker.Template
     public interface IFilmesService
     {
         Task ObterFilmesAsync(Pesquisa pesquisa);
+    }
+
+    /// <summary>
+    /// 
+    /// TODO: Esta classe deve ser removida.
+    /// 
+    /// Está aqui apenas representando um serviço do domínio que irá
+    /// processar o objeto recebido da fila.
+    /// 
+    /// </summary>
+    public class FilmesService : IFilmesService
+    {
+        public Task ObterFilmesAsync(Pesquisa pesquisa) =>
+            Task.CompletedTask;
     }
 }
